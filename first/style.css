@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: aquamarine;
+}
+
+.header {
+  border: 1px solid;
+}
+
