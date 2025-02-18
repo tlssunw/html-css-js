@@ -1,88 +1,23 @@
-let dice = [
-  "https://cdn-icons-png.flaticon.com/128/7262/7262391.png",
-  "https://cdn-icons-png.flaticon.com/128/7262/7262392.png",
-  "https://cdn-icons-png.flaticon.com/128/7262/7262393.png",
-  "https://cdn-icons-png.flaticon.com/128/5414/5414052.png",
-  "https://cdn-icons-png.flaticon.com/128/44/44375.png",
-  "https://cdn-icons-png.flaticon.com/128/7262/7262396.png",
-];
+let width = 0;
+let height = 0;
 
-const divs = document.querySelector("#root > div");
+document.addEventListener("resize", () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
 
-let myDices = Array.from({ length: 4 }, (_, index) => {
-  const img = document.createElement("img");
-  img.alt = `${index + 1}번째 주사위`;
+  console.log({ width, height });
 
-  return img;
-});
+  const x = Math.floor(width / 40);
+  console.log(x, "개의 바둑판을 좌우로 깔아주세ㅕㅇ");
 
-let comDices = [...myDices];
+  const y = Math.floor(height / 40);
+  console.log(y, "개의 바둑판을 상하로 깔아주세요");
 
-console.log(comDices);
+  const tiles = Array.from({ length: y }, (_, i) => i);
+  console.log(tiles);
+  tiles.forEach((tile) => {
+    tile = Array.from({ length: x }, (_, i) => i);
 
-const makeNumber = () => {
-  Math.floor(Math.random() * 6);
-};
-
-console.log(makeNumber);
-
-divs.forEach((div, index) => {
-  div.innerHtml = null;
-
-  if (index === 0) {
-    myDices.map((img) => {
-      img.src = dice[makeNumber()];
-
-      div.append(img);
-    });
-  } else {
-    comDices.forEach((img) => {
-      img.src = dice[makeNumber()];
-      div.append(img);
-    });
-  }
-});
-
-const button = document.querySelector("button");
-
-const whoWins = (d1, d2) => {
-  let sum1 = 0;
-  let sun2 = 0;
-
-  d1.forEach((img) => {
-    const index = dice.findIndex((src) => src === img.src);
-    if (index >= 0) {
-      sum1 += index + 1;
-    }
+    tile.forEach(() => Array.from({ length: x }, { _, i }));
   });
-};
-
-d2.forEach((img) => {
-  const index = dice.findIndex((src) => src === img.src);
-  if (index >= 0) {
-    sum1 += index + 1;
-  }
-});
-
-console.log;
-
-button.onclick = () => {
-  const id = setInterval(() => {
-    myDices.forEach((img) => {
-      img.src = dice[makeNumber()];
-      img.animate([{ transform: "rotate(0deg)" }], {});
-    });
-  }, 1000);
-};
-
-let time = 0;
-
-const countId = setInterval(() => {
-  if (time === 3) {
-    clearInterval(countId);
-    clearInterval(id);
-    time = 0;
-    return;
-  }
-  time += 1;
 });
